@@ -50,7 +50,7 @@ type Media struct {
 	PingStatus   string       `json:"ping_status,omitempty"`
 	AltText      string       `json:"alt_text,omitempty"`
 	Caption      string       `json:"caption,omitempty"`
-	Description  string       `json:"description,omitempty"`
+	Description  interface{}  `json:"description,omitempty"`
 	MediaType    string       `json:"media_type,omitempty"`
 	MediaDetails MediaDetails `json:"media_details,omitempty"`
 	Post         int          `json:"post,omitempty"`
