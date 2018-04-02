@@ -27,6 +27,10 @@ type MediaDetails struct {
 	Sizes     MediaDetailsSizes      `json:"sizes,omitempty"`
 	ImageMeta map[string]interface{} `json:"image_meta,omitempty"`
 }
+type MediaCaption struct {
+	Raw      string `json:"raw,omitempty"`
+	Rendered string `json:"rendered,omitempty"`
+}
 type MediaUploadOptions struct {
 	Filename    string
 	ContentType string
@@ -49,7 +53,7 @@ type Media struct {
 	MediaStatus  string       `json:"comment_status,omitempty"`
 	PingStatus   string       `json:"ping_status,omitempty"`
 	AltText      string       `json:"alt_text,omitempty"`
-	Caption      interface{}  `json:"caption,omitempty"`
+	Caption      MediaCaption `json:"caption,omitempty"`
 	Description  interface{}  `json:"description,omitempty"`
 	MediaType    string       `json:"media_type,omitempty"`
 	MediaDetails MediaDetails `json:"media_details,omitempty"`
