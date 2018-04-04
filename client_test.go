@@ -1,7 +1,7 @@
 package wordpress_test
 
 import (
-	"github.com/sogko/go-wordpress"
+	"github.com/mastermind-ua/go-wordpress"
 	"os"
 	"testing"
 )

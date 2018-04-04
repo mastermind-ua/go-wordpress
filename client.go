@@ -22,6 +22,7 @@ const (
 	CollectionTerms      = "terms"
 	CollectionStatuses   = "statuses"
 	CollectionTypes      = "types"
+	CollectionCategories = "categories"
 )
 
 type GeneralError struct {
@@ -124,6 +125,13 @@ func (client *Client) Types() *TypesCollection {
 	return &TypesCollection{
 		client: client,
 		url:    fmt.Sprintf("%v/%v", client.baseURL, CollectionTypes),
+	}
+}
+
+func (client *Client) Categories() *CategoriesCollection {
+	return &CategoriesCollection{
+		client: client,
+		url:    fmt.Sprintf("%v/%v", client.baseURL, CollectionCategories),
 	}
 }
 

@@ -2,7 +2,7 @@ package wordpress_test
 
 import (
 	"fmt"
-	"github.com/sogko/go-wordpress"
+	"github.com/mastermind-ua/go-wordpress"
 	"log"
 	"net/http"
 	"testing"
