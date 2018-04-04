@@ -164,7 +164,7 @@ func TestTermsCategoryCreate_Existing(t *testing.T) {
 		t.Fatalf("Unexpected error response from server, unable to unmarshall message %v", err.Error())
 	}
 	if len(serverErrors) != 1 {
-		t.Errorf("Expected one error", len(serverErrors))
+		t.Errorf("Expected one error: %d", len(serverErrors))
 	}
 	if serverErrors[0].Code != "term_exists" {
 		t.Errorf("Unexpected err.code, %v != term_exists", serverErrors[0].Code)
