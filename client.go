@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"reflect"
+	"time"
 )
 
 const (
@@ -31,6 +32,10 @@ type GeneralError struct {
 	Data    int    `json:"data"` // Unsure if this is consistent
 }
 
+type ClientOptions struct {
+	Timeout time.Duration
+}
+
 type Options struct {
 	BaseAPIURL string
 
@@ -38,6 +43,8 @@ type Options struct {
 	Username string
 	Password string
 	// TODO: support OAuth authentication
+
+	ClientOptions ClientOptions
 }
 
 type Client struct {
@@ -47,9 +54,9 @@ type Client struct {
 }
 
 // Used to create a new SuperAgent object.
-func newHTTPClient() *gorequest.SuperAgent {
+func newHTTPClient(options *ClientOptions) *gorequest.SuperAgent {
 	client := gorequest.New()
-	client.Client = &http.Client{Jar: nil}
+	client.Client = &http.Client{Jar: nil, Timeout: options.Timeout}
 	client.Transport = &http.Transport{
 		DisableKeepAlives: true,
 	}
@@ -57,7 +64,7 @@ func newHTTPClient() *gorequest.SuperAgent {
 }
 
 func NewClient(options *Options) *Client {
-	req := newHTTPClient().SetBasicAuth(options.Username, options.Password)
+	req := newHTTPClient(&options.ClientOptions).SetBasicAuth(options.Username, options.Password)
 	req = req.RedirectPolicy(func(r gorequest.Request, via []gorequest.Request) error {
 		// perform BasicAuth on each redirect request.
 		// (requests are cookie-less; so we need to keep re-auth-ing again)
